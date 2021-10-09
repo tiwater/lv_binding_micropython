@@ -8,6 +8,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_system.h"
+#include "esp_partition.h"
 #include "soc/cpu.h"
 
 
@@ -229,4 +230,19 @@ void ili9xxx_flush(void *_disp_drv, const void *_area, void *_color_p)
 	}
 
 	ili9xxx_send_data_dma(disp_drv, color_p, size * color_size, dc, *spi_ptr);
+}
+
+void port_font_partition_read(uint8_t* buf, int part_type, int offset, int size){
+
+    const esp_partition_t *partition = esp_partition_find_first(part_type, ESP_PARTITION_SUBTYPE_ANY, "font");
+    assert(partition != NULL);
+
+    uint8_t  err = 0xff;
+   
+    err = esp_partition_read(partition, offset, buf, size);
+
+    if(err != 0)
+    {
+        ets_printf("user flash read err %d",err);
+    }
 }
