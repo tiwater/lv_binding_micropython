@@ -158,6 +158,7 @@ endfunction()
 set(LV_INCLUDE
     ${LV_BINDINGS_DIR}
     ${LV_PNG_DIR}
+    ${LVGL_DIR}/src
 )
 
 # Add sources to CMake component
@@ -167,6 +168,8 @@ set(LV_SRC
     ${LV_PNG}
     ${LV_PNG_C}
     ${LV_BINDINGS_DIR}/driver/png/mp_lodepng.c
+    ${LVGL_DIR}/src/extra/widgets/lv_lib_gif/lv_gif.c
+    ${LVGL_DIR}/src/extra/widgets/lv_lib_gif/gifdec.c
 )
 
 if(ESP_PLATFORM)
