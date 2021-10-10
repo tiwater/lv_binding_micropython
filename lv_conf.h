@@ -354,7 +354,7 @@ e.g. "stm32f769xx.h" or "stm32f429xx.h"*/
 #define LV_FONT_FMT_TXT_LARGE   0
 
 /*Enables/disables support for compressed fonts.*/
-#define LV_USE_FONT_COMPRESSED  0
+#define LV_USE_FONT_COMPRESSED  1
 
 /*Enable subpixel rendering*/
 #define LV_USE_FONT_SUBPX       0
