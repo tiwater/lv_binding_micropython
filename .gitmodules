@@ -4,6 +4,3 @@
 [submodule "driver/png/lodepng"]
 	path = driver/png/lodepng
 	url = https://github.com/lvandeve/lodepng.git
-[submodule "lvgl"]
-	path = lvgl
-	url = git@github.com:tiwater/lvgl.git
