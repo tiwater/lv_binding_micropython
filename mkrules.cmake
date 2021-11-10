@@ -168,8 +168,8 @@ set(LV_SRC
     ${LV_PNG}
     ${LV_PNG_C}
     ${LV_BINDINGS_DIR}/driver/png/mp_lodepng.c
-    ${LVGL_DIR}/src/extra/widgets/lv_lib_gif/lv_gif.c
-    ${LVGL_DIR}/src/extra/widgets/lv_lib_gif/gifdec.c
+    ${LVGL_DIR}/src/extra/libs/gif/lv_gif.c
+    ${LVGL_DIR}/src/extra/libs/gif/gifdec.c
 )
 
 if(ESP_PLATFORM)
