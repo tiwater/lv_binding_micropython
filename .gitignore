@@ -5,3 +5,5 @@ yacctab.py
 *.swn
 *.bak
 .DS_Store
+.history
+.vscode
