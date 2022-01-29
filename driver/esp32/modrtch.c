@@ -9,6 +9,7 @@
 #include "../include/common.h"
 #include "driver/gpio.h"
 #include "driver/adc.h"
+#include "driver/adc_deprecated.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/semphr.h"
