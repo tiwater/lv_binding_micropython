@@ -68,7 +68,7 @@ static inline void cb_isr(mp_obj_t cb, mp_obj_t arg)
 
         // Calling micropython from ISR
         // See: https://github.com/micropython/micropython/issues/4895
-
+#if MICROPY_PY_THREAD
         void *old_state = mp_thread_get_state();
 
         mp_state_thread_t ts; // local thread state for the ISR
@@ -77,7 +77,7 @@ static inline void cb_isr(mp_obj_t cb, mp_obj_t arg)
         mp_stack_set_limit(configIDLE_TASK_STACK_SIZE - 1024); // tune based on ISR thread stack size
         mp_locals_set(mp_state_ctx.thread.dict_locals); // use main thread's locals
         mp_globals_set(mp_state_ctx.thread.dict_globals); // use main thread's globals
-
+#endif
         mp_sched_lock(); // prevent VM from switching to another MicroPython thread
         gc_lock(); // prevent memory allocation
 
@@ -92,8 +92,9 @@ static inline void cb_isr(mp_obj_t cb, mp_obj_t arg)
 
         gc_unlock();
         mp_sched_unlock();
-
+#if MICROPY_PY_THREAD
         mp_thread_set_state(old_state);
+#endif
 
         mp_hal_wake_main_task_from_isr();
     }
