@@ -64,11 +64,11 @@ static inline void cb_isr(mp_obj_t cb, mp_obj_t arg)
 {
     if (cb != NULL && cb != mp_const_none) {
 
-        volatile uint32_t sp = (uint32_t)get_sp();
-
         // Calling micropython from ISR
         // See: https://github.com/micropython/micropython/issues/4895
 #if MICROPY_PY_THREAD
+        volatile uint32_t sp = (uint32_t)get_sp();
+
         void *old_state = mp_thread_get_state();
 
         mp_state_thread_t ts; // local thread state for the ISR
@@ -122,6 +122,8 @@ void ex_spi_post_cb_isr(spi_transaction_t *trans)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ILI9xxx flush and ISR implementation in C
+
+#if LV_USE_ILI9XXX
 
 #include "lvgl/lvgl.h"
 
@@ -249,17 +251,4 @@ void ili9xxx_flush(void *_disp_drv, const void *_area, void *_color_p)
     ili9xxx_send_data_dma(disp_drv, color_p, size * color_size, dc, *spi_ptr);
 }
 
-void port_font_partition_read(uint8_t* buf, int part_type, int offset, int size){
-
-    const esp_partition_t *partition = esp_partition_find_first(part_type, ESP_PARTITION_SUBTYPE_ANY, "font");
-    assert(partition != NULL);
-
-    uint8_t  err = 0xff;
-   
-    err = esp_partition_read(partition, offset, buf, size);
-
-    if(err != 0)
-    {
-        ets_printf("user flash read err %d",err);
-    }
-}
+#endif

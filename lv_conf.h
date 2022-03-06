@@ -671,6 +671,9 @@
 /*Stress test for LVGL*/
 #define LV_USE_DEMO_STRESS      0
 
+/*ILI9XXX display driver for LVGL*/
+#define LV_USE_ILI9XXX          0
+
 /*Music player demo*/
 #define LV_USE_DEMO_MUSIC       0
 #if LV_USE_DEMO_MUSIC
